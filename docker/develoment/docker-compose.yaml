@@ -1,0 +1,30 @@
+version: "3.7"
+name: "beny-directus"
+
+services:
+  beny-directus:
+    container_name: beny-directus
+    image: directus/directus:11.10.0
+    ports:
+      - "8055:8055"
+    volumes:
+      - ../../database:/directus/database
+      - ../../uploads:/directus/uploads
+      - ../../extensions:/directus/extensions
+    environment:
+      SECRET: "replace-with-random-value"
+      ADMIN_EMAIL: "admin@example.com"
+      ADMIN_PASSWORD: "d1r3ctu5"
+      DB_CLIENT: "sqlite3"
+      DB_FILENAME: "/directus/database/data.db"
+      WEBSOCKETS_ENABLED: "true"
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: "true"
+      CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_SRC: "array:'self',blob:,https://*"
+      EXTENSIONS_AUTO_RELOAD: true
+    networks:
+      - beny
+
+networks:
+  beny:
+    external: true
