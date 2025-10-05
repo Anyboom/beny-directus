@@ -11,7 +11,7 @@ async function extracted(service, req, res, exceptions) {
 
 	try {
 		const routes = await routeService.readByQuery({
-			fields: ['*', 'blocks.*.*']
+			fields: ["title", "slug", "blocks.collection", "blocks.sort", "blocks.item.*.*"]
 		});
 		const requestedPath = '/' + path.join('/');
 
@@ -22,8 +22,8 @@ async function extracted(service, req, res, exceptions) {
 				return res.json({
 					matched: true,
 					template: route.slug,
-					params,
-					data: route
+					params: params,
+					...route
 				});
 			}
 		}
