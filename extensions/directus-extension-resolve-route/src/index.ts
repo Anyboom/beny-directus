@@ -11,7 +11,7 @@ async function extracted(service, req, res, exceptions) {
 
 	try {
 		const routes = await routeService.readByQuery({
-			fields: ["title", "slug", "blocks.collection", "blocks.sort", "blocks.item.*.*"]
+			fields: ["title", "slug", "blocks.collection", "blocks.sort", "blocks.item.*.*.*.*", "description"],
 		});
 		const requestedPath = '/' + path.join('/');
 
